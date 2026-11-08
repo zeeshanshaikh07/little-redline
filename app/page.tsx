@@ -267,9 +267,6 @@ export default function HomePage() {
               <a className="button button-dark" href="#shop">
                 Find your next car <span>↘</span>
               </a>
-              <span className="hero-note">
-                <span className="spark">✳</span> 50 cars. One very full shelf.
-              </span>
             </div>
             <div className="hero-stats">
               <div>
@@ -354,7 +351,7 @@ export default function HomePage() {
               </h2>
             </div>
             <p>
-              Every car has a story.
+              Every car has a story.{" "}
               <br />
               Here&apos;s where yours starts.
             </p>

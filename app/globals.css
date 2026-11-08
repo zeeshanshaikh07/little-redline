@@ -188,16 +188,6 @@ body {
   font-size: 16px;
   font-weight: 400;
 }
-.hero-note {
-  font: 9px var(--mono);
-  color: var(--muted);
-}
-.spark {
-  color: var(--red);
-  font-size: 17px;
-  vertical-align: -2px;
-  margin-right: 5px;
-}
 .hero-stats {
   border-top: 1px solid var(--line);
   display: flex;
@@ -1186,8 +1176,26 @@ body {
 }
 .admin-form input[type="file"] {
   width: 100%;
+  min-height: 48px;
+  padding: 6px;
+  border: 1px dashed #bdb6a9;
+  background: rgba(242, 238, 229, 0.65);
   color: var(--muted);
   font: 10px var(--body);
+  cursor: pointer;
+}
+.admin-form input[type="file"]::file-selector-button {
+  margin-right: 12px;
+  padding: 9px 13px;
+  border: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font: 600 10px var(--body);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.admin-form input[type="file"]::file-selector-button:hover {
+  background: var(--red);
 }
 .admin-form input[type="color"] {
   width: 100%;
