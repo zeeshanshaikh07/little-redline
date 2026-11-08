@@ -525,10 +525,8 @@ body {
 }
 .product-photo {
   display: block;
-  width: auto;
-  height: auto;
-  max-width: calc(100% - 24px);
-  max-height: calc(100% - 24px);
+  width: calc(100% - 32px);
+  height: calc(100% - 32px);
   object-fit: contain;
   object-position: center;
   transition: transform 0.3s;
@@ -1082,7 +1080,7 @@ body {
 }
 
 .product-card:hover .product-photo {
-  transform: translateY(-5px) rotate(-3deg);
+  transform: translateY(-4px);
 }
 
 .cart-thumb .product-photo {

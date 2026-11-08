@@ -56,6 +56,42 @@ function formatPrice(value: number) {
   }).format(value);
 }
 
+async function normalizeProductPhoto(file: File): Promise<Blob> {
+  const image = await createImageBitmap(file);
+  const canvas = document.createElement("canvas");
+  const size = 1200;
+  const padding = 72;
+  const scale = Math.min(
+    (size - padding * 2) / image.width,
+    (size - padding * 2) / image.height,
+  );
+  const width = image.width * scale;
+  const height = image.height * scale;
+  canvas.width = size;
+  canvas.height = size;
+  const context = canvas.getContext("2d");
+  if (!context) {
+    image.close();
+    throw new Error("Could not prepare this photo. Please try another image.");
+  }
+
+  context.fillStyle = "#e9e4d9";
+  context.fillRect(0, 0, size, size);
+  context.drawImage(image, (size - width) / 2, (size - height) / 2, width, height);
+  image.close();
+
+  return new Promise((resolve, reject) => {
+    canvas.toBlob(
+      (blob) =>
+        blob
+          ? resolve(blob)
+          : reject(new Error("Could not prepare this photo. Please try again.")),
+      "image/webp",
+      0.92,
+    );
+  });
+}
+
 export default function AdminPage() {
   const [screen, setScreen] = useState<"checking" | "login" | "admin">(
     "checking",
@@ -250,14 +286,13 @@ export default function AdminPage() {
       let imageUrl = form.image_url.trim() || null;
 
       if (photoFile) {
-        const extension = photoFile.name.split(".").pop()?.toLowerCase() || "jpg";
-        const safeExtension = extension.replace(/[^a-z0-9]/g, "") || "jpg";
-        const path = `${id}-${crypto.randomUUID()}.${safeExtension}`;
+        const normalizedPhoto = await normalizeProductPhoto(photoFile);
+        const path = `${id}-${crypto.randomUUID()}.webp`;
 
         const { error: uploadError } = await supabase.storage
           .from("product-photos")
-          .upload(path, photoFile, {
-            contentType: photoFile.type,
+          .upload(path, normalizedPhoto, {
+            contentType: "image/webp",
             upsert: false,
           });
 
@@ -506,7 +541,7 @@ export default function AdminPage() {
                     }}
                   />
                   <span className="admin-help">
-                    Choosing a new photo replaces the listing photo.
+                    Choosing a photo automatically fits it inside a square frame. It replaces the listing photo.
                   </span>
                 </label>
 
