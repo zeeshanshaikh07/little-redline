@@ -615,6 +615,16 @@ body {
   grid-column: 1/-1;
   margin-top: 2px;
 }
+.product-numbers {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  grid-column: 1/-1;
+  margin-top: 3px;
+  color: #6f6c64;
+  font: 8px var(--mono);
+  letter-spacing: 0.02em;
+}
 .no-results {
   grid-column: 1/-1;
   padding: 65px 20px;

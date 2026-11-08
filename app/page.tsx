@@ -7,6 +7,8 @@ type Car = {
   id: string;
   name: string;
   series: string;
+  cardNumber: string;
+  seriesNumber: string;
   price: number;
   condition: string;
   tag: string;
@@ -18,6 +20,8 @@ type ProductRow = {
   id: string;
   name: string;
   series: string;
+  card_number: string | null;
+  series_number: string | null;
   price_inr: number;
   condition_note: string;
   badge: string;
@@ -100,7 +104,7 @@ export default function HomePage() {
         const { data, error } = await supabase
           .from("products")
           .select(
-            "id, name, series, price_inr, condition_note, badge, stock_qty, image_url",
+            "id, name, series, card_number, series_number, price_inr, condition_note, badge, stock_qty, image_url",
           )
           .eq("published", true)
           .gt("stock_qty", 0)
@@ -122,6 +126,8 @@ export default function HomePage() {
             id: row.id,
             name: row.name,
             series: row.series,
+            cardNumber: row.card_number ?? "",
+            seriesNumber: row.series_number ?? "",
             price: row.price_inr,
             condition: row.condition_note,
             tag: row.badge,
@@ -420,6 +426,13 @@ export default function HomePage() {
                       {money(car.price)}
                     </strong>
                     <span className="product-condition">{car.condition}</span>
+                    {(car.cardNumber || car.seriesNumber) && (
+                      <span className="product-numbers">
+                        {car.cardNumber && <span>Card {car.cardNumber}</span>}
+                        {car.cardNumber && car.seriesNumber && <span aria-hidden="true">·</span>}
+                        {car.seriesNumber && <span>Series {car.seriesNumber}</span>}
+                      </span>
+                    )}
                   </div>
                 </article>
               ))

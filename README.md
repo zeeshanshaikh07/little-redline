@@ -45,6 +45,8 @@ The storefront reads from `public.products`. Its current columns are:
 | `id`             | Unique product slug, used as the primary key |
 | `name`           | Car name                                     |
 | `series`         | Series or collection name                    |
+| `card_number`    | Package card number, such as `199/250`        |
+| `series_number`  | Position in the subseries, such as `10/10`    |
 | `price_inr`      | Price in whole rupees                        |
 | `condition_note` | Car and packaging condition                  |
 | `badge`          | Optional product label                       |
@@ -56,14 +58,13 @@ The storefront reads from `public.products`. Its current columns are:
 
 Row Level Security should allow visitors to read only published products with stock. Admins are allowlisted in `public.admin_users`; policies grant them product reads and writes. The public `product-photos` bucket serves images, while its upload policy restricts uploads to admins. Do not expose a Supabase secret or service-role key in the browser.
 
-The migration at [`supabase/migrations/20261108143000_remove_unused_product_columns.sql`](supabase/migrations/20261108143000_remove_unused_product_columns.sql) removes the unused category and illustration columns from an earlier schema.
 
 ## Admin page
 
 Sign in at `/admin` with a Supabase Auth user whose ID is in `public.admin_users`. The page can:
 
 - Add products and edit existing listings
-- Set price, quantity, condition notes, display order, and published status
+- Set package numbering, price, quantity, condition notes, display order, and published status
 - Upload JPEG, PNG, or WebP photos up to 5 MB to the `product-photos` bucket
 
 New products receive a slug from their name. Keep names unique enough to avoid slug collisions.

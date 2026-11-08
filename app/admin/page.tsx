@@ -7,6 +7,8 @@ type Product = {
   id: string;
   name: string;
   series: string;
+  card_number: string | null;
+  series_number: string | null;
   price_inr: number;
   condition_note: string;
   badge: string;
@@ -19,6 +21,8 @@ type Product = {
 type ProductForm = {
   name: string;
   series: string;
+  card_number: string;
+  series_number: string;
   price_inr: string;
   condition_note: string;
   badge: string;
@@ -31,6 +35,8 @@ type ProductForm = {
 const emptyForm = (): ProductForm => ({
   name: "",
   series: "",
+  card_number: "",
+  series_number: "",
   price_inr: "",
   condition_note: "",
   badge: "",
@@ -235,6 +241,8 @@ export default function AdminPage() {
     setForm({
       name: product.name,
       series: product.series,
+      card_number: product.card_number ?? "",
+      series_number: product.series_number ?? "",
       price_inr: String(product.price_inr),
       condition_note: product.condition_note,
       badge: product.badge,
@@ -307,6 +315,8 @@ export default function AdminPage() {
         id,
         name: form.name.trim(),
         series: form.series.trim(),
+        card_number: form.card_number.trim() || null,
+        series_number: form.series_number.trim() || null,
         price_inr: price,
         condition_note: form.condition_note.trim(),
         badge: form.badge.trim(),
@@ -469,6 +479,25 @@ export default function AdminPage() {
                     placeholder="e.g. JDM Legends"
                   />
                 </label>
+
+                <div className="admin-form-row">
+                  <label>
+                    Card number
+                    <input
+                      value={form.card_number}
+                      onChange={(event) => updateField("card_number", event.target.value)}
+                      placeholder="e.g. 199/250"
+                    />
+                  </label>
+                  <label>
+                    Series number
+                    <input
+                      value={form.series_number}
+                      onChange={(event) => updateField("series_number", event.target.value)}
+                      placeholder="e.g. 10/10 or 5/5"
+                    />
+                  </label>
+                </div>
 
                 <div className="admin-form-row">
                   <label>
