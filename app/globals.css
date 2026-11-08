@@ -1084,8 +1084,8 @@ body {
 }
 
 .cart-thumb .product-photo {
-  max-width: 86%;
-  max-height: 86%;
+  width: 100%;
+  height: 100%;
 }
 
 /* Little Redline admin */
