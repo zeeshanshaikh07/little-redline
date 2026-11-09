@@ -517,9 +517,10 @@ export default function HomePage() {
               <em>A tiny time machine.</em>
             </h2>
             <p>
-              We believe every collector remembers their first favorite. Little
-              Redline is for the ones you missed, the ones you never let go, and
-              the ones you haven&apos;t met yet.
+              Little Redline is run by <strong>Zeeshan</strong>. We believe
+              every collector remembers their first favorite. Little Redline
+              is for the ones you missed, the ones you never let go, and the
+              ones you haven&apos;t met yet.
             </p>
             <a href="#shop" className="text-link">
               Take a look around <span>↗</span>
@@ -542,7 +543,9 @@ export default function HomePage() {
             little<span>redline</span>
           </span>
         </a>
-        <span>For the love of the little things. © 2026 Little Redline</span>
+        <span>
+          For the love of the little things, with ❤️ by <strong>Zeeshan</strong>. © 2026 Little Redline
+        </span>
         <div>
           <a href="mailto:hello@littleredline.in">Say hello ↗</a>
           <a href="#shop">Back to top ↑</a>
