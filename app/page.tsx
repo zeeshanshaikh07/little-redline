@@ -181,6 +181,12 @@ export default function HomePage() {
         !query || `${car.name} ${car.series}`.toLowerCase().includes(query),
     );
   }, [cars, search]);
+  const catalogLayoutClass =
+    visibleCars.length === 1
+      ? "catalog-layout--single"
+      : visibleCars.length === 2
+        ? "catalog-layout--pair"
+        : "";
 
   const cartEntries = Object.entries(cart).filter(
     ([, quantity]) => quantity > 0,
@@ -342,7 +348,7 @@ export default function HomePage() {
         </section>
 
         <section className="shop-section" id="shop">
-          <div className="section-heading">
+          <div className={`section-heading ${catalogLayoutClass}`}>
             <div>
               <div className="eyebrow">
                 <span className="eyebrow-line" /> BROWSE THE COLLECTION
@@ -352,13 +358,11 @@ export default function HomePage() {
               </h2>
             </div>
             <p>
-              Every car has a story.{" "}
-              <br />
-              Here&apos;s where yours starts.
+              Every car has a story. Here&apos;s where yours starts.
             </p>
           </div>
 
-          <div className="shop-toolbar">
+          <div className={`shop-toolbar ${catalogLayoutClass}`}>
             <div className="filter-tabs" aria-label="Product count">
               <span className="filter-tab active">
                 All cars <span>{cars.length.toString().padStart(2, "0")}</span>
@@ -377,7 +381,16 @@ export default function HomePage() {
             </label>
           </div>
 
-          <div className="product-grid" aria-live="polite">
+          <div
+            className={`product-grid ${catalogLayoutClass} ${
+              visibleCars.length === 1
+                ? "product-grid--single"
+                : visibleCars.length === 2
+                  ? "product-grid--pair"
+                  : ""
+            }`}
+            aria-live="polite"
+          >
             {productsLoading ? (
               <div className="no-results">Loading cars from the garage…</div>
             ) : productsError ? (
