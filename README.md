@@ -20,6 +20,8 @@ Create `.env.local` in the project root:
 ```env
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-supabase-publishable-key
+# Optional: add the token from Google Search Console to verify site ownership
+GOOGLE_SITE_VERIFICATION=your-google-verification-token
 ```
 
 Start the development server:
@@ -93,3 +95,9 @@ supabase/
 ```
 
 `.env.local`, `node_modules/`, and `.next/` are excluded by `.gitignore`.
+
+## SEO and Google Search Console
+
+The live site URL is `https://little-redline.vercel.app/`. The app provides a sitemap at `/sitemap.xml`, crawler rules at `/robots.txt`, canonical and Open Graph metadata, and a `noindex` directive for `/admin`. The sitemap currently lists the storefront because individual product pages have not been added yet.
+
+To verify the site in Google Search Console, add `https://little-redline.vercel.app/` as a URL-prefix property and choose HTML tag verification. Add the token from Google's `content` value as `GOOGLE_SITE_VERIFICATION` in Vercel's project environment variables, redeploy, and complete verification. Then submit `https://little-redline.vercel.app/sitemap.xml` in Search Console.

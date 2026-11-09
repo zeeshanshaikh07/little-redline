@@ -1,10 +1,28 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const siteUrl = "https://little-redline.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Little Redline — Hot Wheels for collectors",
   description:
-    "A collector-first Hot Wheels shop. Find your next favorite die-cast car.",
+    "Shop collectible Hot Wheels in India. Browse handpicked die-cast cars, check condition and packaging details, and find your next 1:64 favorite.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    title: "Little Redline — Hot Wheels for collectors",
+    description:
+      "Shop collectible Hot Wheels in India. Browse handpicked die-cast cars and find your next 1:64 favorite.",
+    siteName: "Little Redline",
+    locale: "en_IN",
+  },
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 
 export default function RootLayout({
