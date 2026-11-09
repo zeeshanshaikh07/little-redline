@@ -1246,6 +1246,17 @@ body {
     font-size: 9px;
   }
 }
+@media (max-width: 420px) {
+  .product-info {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .product-info h3 {
+    min-width: 0;
+  }
+  .product-price {
+    align-self: center;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
