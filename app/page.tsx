@@ -38,6 +38,8 @@ function money(amount: number) {
   }).format(amount);
 }
 
+const WHATSAPP_NUMBER = "917841062036";
+
 function VehicleArt({ name }: { name: string }) {
   return (
     <svg
@@ -223,6 +225,34 @@ export default function HomePage() {
       delete next[id];
       return next;
     });
+  }
+
+  function orderOnWhatsApp() {
+    const orderLines = cartEntries.flatMap(([id, quantity]) => {
+      const car = cars.find((item) => item.id === id);
+      if (!car) return [];
+
+      return [
+        `• ${car.name} — ${quantity} × ${money(car.price)} = ${money(quantity * car.price)}`,
+      ];
+    });
+
+    const message = [
+      "Hi Little Redline! I'd like to place this order:",
+      "",
+      ...orderLines,
+      "",
+      `Subtotal: ${money(subtotal)}`,
+      "",
+      "Please confirm availability, shipping charges, and payment options.",
+      "",
+      "My name:",
+      "Delivery address:",
+      "PIN code:",
+    ].join("\n");
+
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   }
 
   return (
@@ -600,18 +630,14 @@ export default function HomePage() {
               <span>Subtotal</span>
               <strong>{money(subtotal)}</strong>
             </div>
-            <p>Shipping calculated at checkout.</p>
+            <p>Shipping and payment details confirmed on WhatsApp.</p>
             <button
               className="button button-red checkout-button"
-              onClick={() =>
-                notify(
-                  "Checkout will be available when payments are connected.",
-                )
-              }
+              onClick={orderOnWhatsApp}
             >
-              Checkout <span>↗</span>
+              Order on WhatsApp <span>↗</span>
             </button>
-            <small>Demo storefront · Checkout isn&apos;t connected yet.</small>
+            <small>Your order details will be ready to review before sending.</small>
           </div>
         )}
       </aside>
