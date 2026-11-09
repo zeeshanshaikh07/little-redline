@@ -85,10 +85,14 @@ Checkout, order storage, shipping calculation, customer notifications, and payme
 ```text
 app/
   admin/page.tsx   Admin sign-in and product editor
+  cars/[slug]/     Server-rendered car detail pages
   globals.css      Storefront and admin styles
   layout.tsx       Root layout and metadata
   page.tsx         Storefront
+  robots.ts        Search crawler rules
+  sitemap.ts       Storefront and product URL sitemap
 lib/
+  products.ts      Public server-side product queries
   supabase.ts      Supabase browser client
 supabase/
   migrations/      SQL schema changes
@@ -98,6 +102,6 @@ supabase/
 
 ## SEO and Google Search Console
 
-The live site URL is `https://little-redline.vercel.app/`. The app provides a sitemap at `/sitemap.xml`, crawler rules at `/robots.txt`, canonical and Open Graph metadata, and a `noindex` directive for `/admin`. The sitemap currently lists the storefront because individual product pages have not been added yet.
+The live site URL is `https://little-redline.vercel.app/`. The app provides a sitemap at `/sitemap.xml`, crawler rules at `/robots.txt`, canonical and Open Graph metadata, and a `noindex` directive for `/admin`. Published, in-stock listings have server-rendered pages at `/cars/[slug]`; the sitemap refreshes hourly and includes those pages.
 
 To verify the site in Google Search Console, add `https://little-redline.vercel.app/` as a URL-prefix property and choose HTML tag verification. Add the token from Google's `content` value as `GOOGLE_SITE_VERIFICATION` in Vercel's project environment variables, redeploy, and complete verification. Then submit `https://little-redline.vercel.app/sitemap.xml` in Search Console.

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "../lib/supabase";
 
@@ -398,15 +399,21 @@ export default function HomePage() {
                     >
                       {car.tag}
                     </span>
-                    {car.imageUrl ? (
-                      <img
-                        className="product-photo"
-                        src={car.imageUrl}
-                        alt={`${car.name} Hot Wheels car`}
-                      />
-                    ) : (
-                      <VehicleArt name={car.name} />
-                    )}
+                    <Link
+                      className="product-image-link"
+                      href={`/cars/${car.id}`}
+                      aria-label={`View ${car.name} details`}
+                    >
+                      {car.imageUrl ? (
+                        <img
+                          className="product-photo"
+                          src={car.imageUrl}
+                          alt={`${car.name} Hot Wheels car`}
+                        />
+                      ) : (
+                        <VehicleArt name={car.name} />
+                      )}
+                    </Link>
                     <button
                       className="quick-add"
                       onClick={() => addToCart(car)}
@@ -418,7 +425,11 @@ export default function HomePage() {
                   </div>
                   <div className="product-info">
                     <span className="product-series">{car.series}</span>
-                    <h3>{car.name}</h3>
+                    <h3>
+                      <Link className="product-card-link" href={`/cars/${car.id}`}>
+                        {car.name}
+                      </Link>
+                    </h3>
                     <strong className="product-price">
                       {money(car.price)}
                     </strong>
