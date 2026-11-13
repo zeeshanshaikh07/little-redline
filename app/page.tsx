@@ -387,9 +387,7 @@ export default function HomePage() {
                 Find your <em>favorite.</em>
               </h2>
             </div>
-            <p>
-              Every car has a story. Here&apos;s where yours starts.
-            </p>
+            <p>Every car has a story. Here&apos;s where yours starts.</p>
           </div>
 
           <div className={`shop-toolbar ${catalogLayoutClass}`}>
@@ -437,7 +435,9 @@ export default function HomePage() {
                   <div className="product-image">
                     <span
                       className={`product-tag ${
-                        car.tag.toLowerCase().includes("treasure hunt") ? "red" : ""
+                        car.tag.toLowerCase().includes("treasure hunt")
+                          ? "red"
+                          : ""
                       }`}
                     >
                       {car.tag}
@@ -469,7 +469,10 @@ export default function HomePage() {
                   <div className="product-info">
                     <span className="product-series">{car.series}</span>
                     <h3>
-                      <Link className="product-card-link" href={`/cars/${car.id}`}>
+                      <Link
+                        className="product-card-link"
+                        href={`/cars/${car.id}`}
+                      >
                         {car.name}
                       </Link>
                     </h3>
@@ -480,8 +483,12 @@ export default function HomePage() {
                     {(car.cardNumber || car.seriesNumber) && (
                       <span className="product-numbers">
                         {car.cardNumber && <span>Card {car.cardNumber}</span>}
-                        {car.cardNumber && car.seriesNumber && <span aria-hidden="true">·</span>}
-                        {car.seriesNumber && <span>Series {car.seriesNumber}</span>}
+                        {car.cardNumber && car.seriesNumber && (
+                          <span aria-hidden="true">·</span>
+                        )}
+                        {car.seriesNumber && (
+                          <span>Series {car.seriesNumber}</span>
+                        )}
                       </span>
                     )}
                   </div>
@@ -518,9 +525,9 @@ export default function HomePage() {
             </h2>
             <p>
               Little Redline is run by <strong>Zeeshan</strong>. We believe
-              every collector remembers their first favorite. Little Redline
-              is for the ones you missed, the ones you never let go, and the
-              ones you haven&apos;t met yet.
+              every collector remembers their first favorite. Little Redline is
+              for the ones you missed, the ones you never let go, and the ones
+              you haven&apos;t met yet.
             </p>
             <a href="#shop" className="text-link">
               Take a look around <span>↗</span>
@@ -544,10 +551,11 @@ export default function HomePage() {
           </span>
         </a>
         <span>
-          For the love of the little things, with ❤️ by <strong>Zeeshan</strong>. © 2026 Little Redline
+          For the love of the little things, with ❤️ by <strong>Zeeshan</strong>
+          . © 2026 Little Redline
         </span>
         <div>
-          <a href="mailto:hello@littleredline.in">Say hello ↗</a>
+          <a href="mailto:zeeshanshaikh790.zs@gmail.com">Say hello ↗</a>
           <a href="#shop">Back to top ↑</a>
         </div>
       </footer>
@@ -640,7 +648,9 @@ export default function HomePage() {
             >
               Order on WhatsApp <span>↗</span>
             </button>
-            <small>Your order details will be ready to review before sending.</small>
+            <small>
+              Your order details will be ready to review before sending.
+            </small>
           </div>
         )}
       </aside>

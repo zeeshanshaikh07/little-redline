@@ -18,7 +18,9 @@ function formatPrice(amount: number) {
   }).format(amount);
 }
 
-function productDescription(product: NonNullable<Awaited<ReturnType<typeof getPublishedProduct>>>) {
+function productDescription(
+  product: NonNullable<Awaited<ReturnType<typeof getPublishedProduct>>>,
+) {
   const details = [product.series, product.condition_note]
     .filter(Boolean)
     .join(". ");
@@ -26,7 +28,9 @@ function productDescription(product: NonNullable<Awaited<ReturnType<typeof getPu
   return `Shop ${product.name}${details ? ` — ${details}` : ""} at Little Redline for ${formatPrice(product.price_inr)}. Available in India.`;
 }
 
-export async function generateMetadata({ params }: CarPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: CarPageProps): Promise<Metadata> {
   const { slug } = await params;
   const product = await getPublishedProduct(slug);
 
@@ -109,21 +113,29 @@ export default async function CarPage({ params }: CarPageProps) {
           ) : (
             <div className="product-detail-no-photo">Photo coming soon</div>
           )}
-          {product.badge && <span className="product-detail-badge">{product.badge}</span>}
+          {product.badge && (
+            <span className="product-detail-badge">{product.badge}</span>
+          )}
         </div>
 
         <div className="product-detail-copy">
           <p className="eyebrow">
-            <span className="eyebrow-line" /> {product.series || "COLLECTOR CAR"}
+            <span className="eyebrow-line" />{" "}
+            {product.series || "COLLECTOR CAR"}
           </p>
           <h1>{product.name}</h1>
-          <p className="product-detail-price">{formatPrice(product.price_inr)}</p>
+          <p className="product-detail-price">
+            {formatPrice(product.price_inr)}
+          </p>
           {product.condition_note && (
             <p className="product-detail-condition">{product.condition_note}</p>
           )}
 
           {(product.card_number || product.series_number) && (
-            <div className="product-detail-numbers" aria-label="Package numbering">
+            <div
+              className="product-detail-numbers"
+              aria-label="Package numbering"
+            >
               {product.card_number && (
                 <span>
                   <small>Card</small>
@@ -139,8 +151,13 @@ export default async function CarPage({ params }: CarPageProps) {
             </div>
           )}
 
-          <p className="product-detail-availability">In stock · Ships across India</p>
-          <AddToBagButton productId={product.id} stockQuantity={product.stock_qty} />
+          <p className="product-detail-availability">
+            In stock · Ships across India
+          </p>
+          <AddToBagButton
+            productId={product.id}
+            stockQuantity={product.stock_qty}
+          />
           <Link className="product-detail-back" href="/#shop">
             ← Back to the collection
           </Link>

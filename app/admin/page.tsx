@@ -83,7 +83,13 @@ async function normalizeProductPhoto(file: File): Promise<Blob> {
 
   context.fillStyle = "#e9e4d9";
   context.fillRect(0, 0, size, size);
-  context.drawImage(image, (size - width) / 2, (size - height) / 2, width, height);
+  context.drawImage(
+    image,
+    (size - width) / 2,
+    (size - height) / 2,
+    width,
+    height,
+  );
   image.close();
 
   return new Promise((resolve, reject) => {
@@ -91,7 +97,9 @@ async function normalizeProductPhoto(file: File): Promise<Blob> {
       (blob) =>
         blob
           ? resolve(blob)
-          : reject(new Error("Could not prepare this photo. Please try again.")),
+          : reject(
+              new Error("Could not prepare this photo. Please try again."),
+            ),
       "image/webp",
       0.92,
     );
@@ -306,9 +314,8 @@ export default function AdminPage() {
 
         if (uploadError) throw uploadError;
 
-        imageUrl = supabase.storage
-          .from("product-photos")
-          .getPublicUrl(path).data.publicUrl;
+        imageUrl = supabase.storage.from("product-photos").getPublicUrl(path)
+          .data.publicUrl;
       }
 
       const product = {
@@ -379,7 +386,11 @@ export default function AdminPage() {
           <div className="eyebrow admin-kicker">
             <span className="eyebrow-line" /> PRIVATE PIT LANE
           </div>
-          <h1>Welcome back,<br /><em>collector.</em></h1>
+          <h1>
+            Welcome back,
+            <br />
+            <em>collector.</em>
+          </h1>
           <p className="admin-intro">
             Sign in to add cars, update stock, and keep your listings in tune.
           </p>
@@ -409,7 +420,9 @@ export default function AdminPage() {
               {busy ? "Signing in…" : "Sign in"} <span>↗</span>
             </button>
           </form>
-          <a className="admin-back-link" href="/">← Back to the shop</a>
+          <a className="admin-back-link" href="/">
+            ← Back to the shop
+          </a>
         </section>
       ) : (
         <div className="admin-shell">
@@ -424,7 +437,9 @@ export default function AdminPage() {
               <div className="eyebrow admin-kicker">
                 <span className="eyebrow-line" /> YOUR COLLECTION
               </div>
-              <h1>Cars in the <em>garage.</em></h1>
+              <h1>
+                Cars in the <em>garage.</em>
+              </h1>
             </div>
             <div className="admin-header-actions">
               <a className="button button-dark" href="/">
@@ -466,7 +481,9 @@ export default function AdminPage() {
                   <input
                     required
                     value={form.name}
-                    onChange={(event) => updateField("name", event.target.value)}
+                    onChange={(event) =>
+                      updateField("name", event.target.value)
+                    }
                     placeholder="e.g. Nissan Skyline GT-R"
                   />
                 </label>
@@ -475,7 +492,9 @@ export default function AdminPage() {
                   Series
                   <input
                     value={form.series}
-                    onChange={(event) => updateField("series", event.target.value)}
+                    onChange={(event) =>
+                      updateField("series", event.target.value)
+                    }
                     placeholder="e.g. JDM Legends"
                   />
                 </label>
@@ -485,7 +504,9 @@ export default function AdminPage() {
                     Card number
                     <input
                       value={form.card_number}
-                      onChange={(event) => updateField("card_number", event.target.value)}
+                      onChange={(event) =>
+                        updateField("card_number", event.target.value)
+                      }
                       placeholder="e.g. 199/250"
                     />
                   </label>
@@ -493,7 +514,9 @@ export default function AdminPage() {
                     Series number
                     <input
                       value={form.series_number}
-                      onChange={(event) => updateField("series_number", event.target.value)}
+                      onChange={(event) =>
+                        updateField("series_number", event.target.value)
+                      }
                       placeholder="e.g. 10/10 or 5/5"
                     />
                   </label>
@@ -508,7 +531,9 @@ export default function AdminPage() {
                       step="1"
                       required
                       value={form.price_inr}
-                      onChange={(event) => updateField("price_inr", event.target.value)}
+                      onChange={(event) =>
+                        updateField("price_inr", event.target.value)
+                      }
                     />
                   </label>
                   <label>
@@ -519,7 +544,9 @@ export default function AdminPage() {
                       step="1"
                       required
                       value={form.stock_qty}
-                      onChange={(event) => updateField("stock_qty", event.target.value)}
+                      onChange={(event) =>
+                        updateField("stock_qty", event.target.value)
+                      }
                     />
                   </label>
                 </div>
@@ -529,7 +556,9 @@ export default function AdminPage() {
                   <textarea
                     rows={3}
                     value={form.condition_note}
-                    onChange={(event) => updateField("condition_note", event.target.value)}
+                    onChange={(event) =>
+                      updateField("condition_note", event.target.value)
+                    }
                     placeholder="Describe the car and card condition accurately."
                   />
                 </label>
@@ -538,7 +567,9 @@ export default function AdminPage() {
                   Listing badge
                   <input
                     value={form.badge}
-                    onChange={(event) => updateField("badge", event.target.value)}
+                    onChange={(event) =>
+                      updateField("badge", event.target.value)
+                    }
                     placeholder="COLLECTOR PICK"
                   />
                 </label>
@@ -549,7 +580,9 @@ export default function AdminPage() {
                     type="number"
                     step="1"
                     value={form.sort_order}
-                    onChange={(event) => updateField("sort_order", event.target.value)}
+                    onChange={(event) =>
+                      updateField("sort_order", event.target.value)
+                    }
                   />
                 </label>
 
@@ -570,7 +603,8 @@ export default function AdminPage() {
                     }}
                   />
                   <span className="admin-help">
-                    Choosing a photo automatically fits it inside a square frame. It replaces the listing photo.
+                    Choosing a photo automatically fits it inside a square
+                    frame. It replaces the listing photo.
                   </span>
                 </label>
 
@@ -586,7 +620,9 @@ export default function AdminPage() {
                   <input
                     type="checkbox"
                     checked={form.published}
-                    onChange={(event) => updateField("published", event.target.checked)}
+                    onChange={(event) =>
+                      updateField("published", event.target.checked)
+                    }
                   />
                   <span>
                     <strong>Publish this listing</strong>
@@ -596,7 +632,10 @@ export default function AdminPage() {
 
                 {message && <p className="admin-message">{message}</p>}
 
-                <button className="button button-red admin-save-button" disabled={busy}>
+                <button
+                  className="button button-red admin-save-button"
+                  disabled={busy}
+                >
                   {busy
                     ? "Saving listing…"
                     : editingId
@@ -617,7 +656,9 @@ export default function AdminPage() {
               <div className="admin-inventory-heading">
                 <div>
                   <p className="admin-label">THE COLLECTION</p>
-                  <h2>{products.length} {products.length === 1 ? "car" : "cars"}</h2>
+                  <h2>
+                    {products.length} {products.length === 1 ? "car" : "cars"}
+                  </h2>
                 </div>
                 <button
                   className="admin-add-button"
@@ -631,7 +672,9 @@ export default function AdminPage() {
               {loadingProducts ? (
                 <p className="admin-empty-state">Loading the garage…</p>
               ) : products.length === 0 ? (
-                <p className="admin-empty-state">No cars in your collection yet.</p>
+                <p className="admin-empty-state">
+                  No cars in your collection yet.
+                </p>
               ) : (
                 <div className="admin-product-list">
                   {products.map((product) => (
@@ -646,11 +689,17 @@ export default function AdminPage() {
                       <div className="admin-product-info">
                         <h3>{product.name}</h3>
                         <p>
-                          {product.series || "Collector car"} <span>·</span> {formatPrice(product.price_inr)}
-                          <span> · </span>{product.stock_qty} in stock
+                          {product.series || "Collector car"} <span>·</span>{" "}
+                          {formatPrice(product.price_inr)}
+                          <span> · </span>
+                          {product.stock_qty} in stock
                         </p>
                         <p className="admin-product-status">
-                          <span className={product.published ? "status-live" : "status-draft"}>
+                          <span
+                            className={
+                              product.published ? "status-live" : "status-draft"
+                            }
+                          >
                             {product.published ? "PUBLISHED" : "DRAFT"}
                           </span>
                           {product.image_url ? " · PHOTO ADDED" : " · NO PHOTO"}
